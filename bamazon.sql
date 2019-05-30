@@ -33,3 +33,18 @@ PRIMARY KEY
         ("Virkenstocks sandals", "Clothing", 43, 34),
         ("Bom Slancy - Ghost Peeking", "Books", 23, 123),
         ("Manon Inkjet", "Electronics", 256, 25);
+
+    ALTER TABLE products
+    ADD product_sales INT(10);
+
+    CREATE TABLE departments
+    (
+        department_id INT NOT NULL
+        AUTO_INCREMENT,
+    department_name VARCHAR
+        (30) NOT NULL,
+    over_head_costs INT
+        (10)
+        PRIMARY KEY
+        (department_id)
+);

@@ -67,7 +67,6 @@ function pointOfSale() {
       // We take the input and turn them into numbers
       var id = parseInt(res.id);
       var quantity = parseInt(res.quantity);
-      console.log();
 
       //   We match the input with the proper ID in the database
       connection.query(
@@ -88,7 +87,6 @@ function pointOfSale() {
 function sufficientStock(data, quantity, id) {
   for (let i = 0; i < data.length; i++) {
     var stock = data[i].stock_quantity;
-    console.log(stock);
     // We check if the databases stock is bigger then the order
     if (stock < quantity) {
       console.log("Insufficient quantity!");
@@ -108,8 +106,6 @@ function sufficientStock(data, quantity, id) {
         ],
         function(err, data) {
           if (err) throw err;
-          console.log("I'm the data " + data);
-          console.log(id);
           stockCheck(id, quantity);
         }
       );
@@ -136,6 +132,26 @@ function stockCheck(id, quantity) {
         var totalCost = data[i].price * quantity;
         console.log("Your total costs are: $" + totalCost);
       }
+      productSales(data, totalCost, id);
+    }
+  );
+}
+
+function productSales(data, totalCost, id) {
+  var productSale = totalCost + data[0].product_sales;
+  var productName = data[0].product_name;
+  connection.query(
+    "UPDATE products SET ? WHERE ?",
+    [
+      {
+        product_sales: productSale
+      },
+      {
+        item_id: id
+      }
+    ],
+    function(err, data) {
+      if (err) throw err;
       connection.end();
     }
   );
