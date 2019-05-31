@@ -42,9 +42,16 @@ PRIMARY KEY
         department_id INT NOT NULL
         AUTO_INCREMENT,
     department_name VARCHAR
-        (30) NOT NULL,
+        (30),
     over_head_costs INT
-        (10)
+        (10),
         PRIMARY KEY
         (department_id)
 );
+
+        INSERT INTO departments
+            (department_name, over_head_costs)
+        SELECT department_name
+        FROM products
+
+        VALUES
